@@ -41,4 +41,11 @@ class DataBase{
         
     }
 
+    public function select(){
+
+$query = 'select * from '.$this->table;
+return $this->execute($query);
+
+    }
+
 }
