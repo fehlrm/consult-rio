@@ -9,7 +9,7 @@ class DataBase{
     const DBNAME = 'consultorio';
     private $connection;
     private $table;
-    
+
     public function __construct($table = null){
         $this->setConnection();
         $this->table = $table;
@@ -38,14 +38,25 @@ class DataBase{
          values('.implode(', ',$binds).')';
         $this->execute($query, array_values($array));
         return $this->connection->lastInsertId();
-        
+
     }
-
-    public function select(){
-
-$query = 'select * from '.$this->table;
-return $this->execute($query);
-
+    public function select($where = null, $order = null, $limit = null, $fields = '*'){
+        $where = strlen($where) ? ' where '.$where : '';
+        $order = strlen($order) ? ' order by '.$order : '';
+        $limit = strlen($limit) ? ' limit '.$limit : '';
+        $query = 'select '.$fields.' from '.$this->table . $where . $order .$limit;
+        return $this->execute($query);
+    }
+    public function update($where, $array){
+        $fields = array_keys($array);
+        $binds = array_pad([],count($array),' = ?,');
+        $query = 'update '.$this->table.' set '.implode($binds,$fields).'=? where '.$where;
+        $query = 'update '.$this->table.' set '.implode('= ?, ',$fields).'=? where '.$where;
+        return $this->execute($query,array_values($array));
+    }
+    public function delete($where){
+        $query = 'delete from '.$this->table.' where '.$where;
+        return $this->execute($query);
     }
 
 }
