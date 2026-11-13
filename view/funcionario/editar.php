@@ -1,15 +1,10 @@
 <?php
-
 use App\Funcionario;
 include('../includes/cabecalho.php');
 include('../includes/menu.php');
 include('../includes/rodape.php');
 $id = $_GET['id'];
 $funcionario = Funcionario::buscarPorId($id);
-echo "<pre>";
-print_r($funcionario);
-echo "</pre>";
-
 ?>
 <main class="container">
     <h1>Editar Funcionario</h1>
@@ -20,14 +15,14 @@ echo "</pre>";
         Telefone *: <input name="telefone" type="text" class="form-control" value="<?= $funcionario->telefone ?>" required>
         Email * : <input name="email" type="email" class="form-control" value="<?= $funcionario->email ?>" required>
         Endereço * : <input name="endereco" type="text" class="form-control" value="<?= $funcionario->endereco ?>" required>
-        CRO : <input name="cro" type="text" class="form-control" value="<?= $funcionario->convenio ?>">
-        Especialidade : <input name="especialidade" type="text" class="form-control" value="<?= $funcionario->observacao ?>">
-        Senha : <input name="senha" type="password" class="form-control" value="<?= $funcionario->convenio ?>">
+        CRO : <input name="cro" type="text" class="form-control" value="<?= $funcionario->cro ?>">
+        Especialidade : <input name="especialidade" type="text" class="form-control" value="<?= $funcionario->especialidade ?>">
+        Senha : <input name="senha" type="password" class="form-control" value="<?= $funcionario->senha ?>">
         Perfil *: <select name="perfil" class="form-select">
             <option value="<?= $funcionario->perfil ?>"><?= $funcionario->perfil ?></option>
             <option value="dentista">Dentista</option>
             <option value="secretaria">Secretaria</option>
-                </select>
+        </select>
         <input type="submit" value="Editar" class="btn btn-primary">
     </form>
     <div class="pb-5"></div>

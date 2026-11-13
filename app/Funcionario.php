@@ -3,7 +3,6 @@ namespace App;
 use PDO;
 class Funcionario extends Pessoa{
     public $cro;
-    public $especiacidade;
     public $especialidade;
     public $senha;
     public $perfil;
@@ -21,12 +20,8 @@ class Funcionario extends Pessoa{
             'especialidade' => $this->especialidade,
             'senha' => $this->senha,
             'perfil' => $this->perfil
-        ]);    
-        
-
+        ]);
     }
-    public function alerar(){
-
     public function alterar(){
         return (new DataBase('funcionario'))->update('id = '.$this->id, [
             'nome' => $this->nome,
@@ -41,20 +36,13 @@ class Funcionario extends Pessoa{
             'perfil' => $this->perfil
         ]);
     }
-    public static function excluir(){
-
     public function excluir(){
         return (new DataBase('funcionario'))->delete('id = '.$this->id);
     }
-    public static function listar(){
-
     public static function listar($where = null, $order = null, $limit = null, $fields = '*'){
         return (new DataBase('funcionario'))->select($where, $order, $limit, $fields)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
     public static function buscarPorId($id){
         return (new DataBase('funcionario'))->select('id ='.$id)->fetchObject(self::class);
-    }
-
-}
     }
 }
